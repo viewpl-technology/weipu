@@ -67,7 +67,7 @@ export default function HeadPart() {
       <link rel='manifest' href='/site.webmanifest' />
       <meta name='msapplication-TileColor' content='#da532c' />
       <meta name='theme-color' content='#ffffff' />
-      <script async defer src='https://buttons.github.io/buttons.js'></script>
+      {/* <script async defer src='https://buttons.github.io/buttons.js'></script> */}
     </Head>
   );
 }
