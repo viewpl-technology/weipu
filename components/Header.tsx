@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import DarkSystemLight from './DarkSystemLight';
 
 export default function Header() {
   return (
@@ -10,26 +11,15 @@ export default function Header() {
               src='./images/logo.svg'
               className='h-6 mr-3 sm:h-9'
               alt='Landwind Logo'
-              width={10}
-              height={10}
+              width={32}
+              height={32}
             />
             <span className='self-center text-xl font-semibold whitespace-nowrap dark:text-white'>
               Landwind
             </span>
           </a>
           <div className='flex items-center lg:order-2'>
-            <div className='hidden mt-2 mr-4 sm:inline-block'>
-              <a
-                className='github-button'
-                href='https://github.com/themesberg/landwind'
-                data-size='large'
-                data-icon='octicon-star'
-                data-show-count='true'
-                aria-label='Star themesberg/landwind on GitHub'
-              >
-                Star
-              </a>
-            </div>
+            <DarkSystemLight />
             {/* <!-- <a href="#" className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">Log in</a> --> */}
             <a
               href='https://themesberg.com/product/tailwind-css/landing-page'

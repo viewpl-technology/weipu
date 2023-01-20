@@ -7,16 +7,14 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({
 }: {
   children: React.ReactNode;
 }) => {
-  // <Navbar />
   return (
     <>
-      <Header />
       <HeadPart />
+      <Header />
       {children}
       <Footer />
     </>
   );
-  // <Footer />
 };
 
 export default Layout;

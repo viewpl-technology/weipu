@@ -146,8 +146,8 @@ export default function Footer() {
               src='./images/logo.svg'
               className='h-6 mr-3 sm:h-9'
               alt='Landwind Logo'
-              width={10}
-              height={10}
+              width={32}
+              height={32}
             />
             Landwind
           </a>
