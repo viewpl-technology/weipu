@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --brand-color-0: rgb(230, 150, 98);
+  --brand-color-1: rgb(48, 48, 48);
+}
+
 #header__sun,
 #header__moon,
 #header__indeterminate {
@@ -16,4 +21,18 @@ html[color-theme='light'] #header__sun {
 }
 html[color-theme='system'] #header__indeterminate {
   display: block;
+}
+
+.text-viewpl {
+  font-family: 'Libre Franklin';
+  font-size: 3rem;
+  font-weight: bolder;
+  color: var(--brand-color-0);
+}
+
+.text-technology {
+  font-family: 'San Francisco Display';
+  font-size: 2rem;
+  padding-top: 0.5rem;
+  color: gray;
 }

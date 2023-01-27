@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import '../styles/globals.css';
 import type { AppProps } from 'next/app';
+import '../styles/globals.css';
 import Layout from '../components/layout';
 import { updateTheme } from '../components/DarkSystemLight';
 
