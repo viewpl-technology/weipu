@@ -11,7 +11,7 @@ export default function Document() {
         <NextScript />
         <Script
           strategy='beforeInteractive'
-          src='https://unpkg.com/flowbite@1.5.5/dist/flowbite.js'
+          src='https://unpkg.com/flowbite@1.6.3/dist/flowbite.js'
         />
       </body>
     </Html>
