@@ -7,6 +7,13 @@
   --brand-color-1: rgb(48, 48, 48);
 }
 
+@font-face {
+  font-family: 'Archivo Black';
+  src: url('/fonts/ArchivoBlack-Regular.woff2') format('woff2'),
+    url('/fonts/ArchivoBlack-Regular.woff') format('woff'),
+    url('/fonts/ArchivoBlack-Regular.ttf') format('truetype');
+}
+
 #header__sun,
 #header__moon,
 #header__indeterminate {
@@ -24,14 +31,15 @@ html[color-theme='system'] #header__indeterminate {
 }
 
 .text-viewpl {
-  font-family: 'Libre Franklin';
+  font-family: 'Archivo Black', 'Libre Franklin', 'Arial Black', Helvetica,
+    sans-serif;
   font-size: 3rem;
   font-weight: bolder;
   color: var(--brand-color-0);
 }
 
 .text-technology {
-  font-family: 'San Francisco Display';
+  font-family: 'San Francisco Display', Arial, Helvetica, sans-serif;
   font-size: 2rem;
   padding-top: 0.5rem;
   color: gray;
