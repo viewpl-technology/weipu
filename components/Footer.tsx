@@ -137,16 +137,16 @@ export default function Footer() {
           </div>
         </div>
         <hr className='my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8' />
-        <div className='flex flex-row justify-center items-center gap-x-24'>
-          <a
-            href='#'
-            className='flex items-center justify-center mb-5 text-2xl font-semibold text-gray-900 dark:text-white'
-          >
-            Viewpl Technology
-          </a>
-          <span className='block text-sm text-center text-gray-500 dark:text-gray-400'>
+        <div className='flex flex-row justify-evenly items-center gap-x-24'>
+          <div className='flex items-center text-sm text-center text-gray-500 gap-1 dark:text-gray-400'>
+            <a
+              href='#'
+              className='flex items-center justify-center dark:text-white'
+            >
+              Viewpl Technology
+            </a>
             © 2021-2023 All Rights Reserved
-          </span>
+          </div>
           <ul className='flex justify-center space-x-5'>
             <li>
               <a
