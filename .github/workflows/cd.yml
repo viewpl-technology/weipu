@@ -18,21 +18,24 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: npm install, build
-        run: |
-          npm install
-          npm run build --if-present
       - name: Archive production artifacts
         uses: actions/upload-artifact@v3
         with:
           name: weipu
-          path: |
-            dist
-            !dist/**/*.md
-      - name: 'Upload Artifact'
-        uses: actions/upload-artifact@v3
+          path: .
+          
+      - name: Download weipu artifact
+        uses: actions/download-artifact@v3
         with:
           name: weipu
-          path: dist
-          retention-days: 5
-      
+          
+      - name: Upload weipu artifact via scp
+        uses: appleboy/scp-action@master
+        env:
+          HOST: ${{ secrets.HOST }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PORT: ${{ secrets.PORT }}
+          KEY: ${{ secrets.SSHKEY }}
+        with:
+          name: weipu
+          target: "/home/weipu/download/weipu"
