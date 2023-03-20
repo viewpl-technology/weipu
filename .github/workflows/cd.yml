@@ -52,4 +52,4 @@ jobs:
             rm -rf /home/weipu/www/weipu2/*
             cp -a /home/weipu/download/artifacts/${{ steps.get_next_version.outputs.version }}/* /home/weipu/www/weipu2/
             npm --prefix /home/weipu/www/weipu2/ install
-            npm --prefix /home/weipu/www/weipu2/ build
+            npm --prefix /home/weipu/www/weipu2/ run build
