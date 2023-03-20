@@ -48,7 +48,7 @@ jobs:
           PORT: ${{ secrets.PORT }}
           KEY: ${{ secrets.SSHKEY }}
           script: |
-            "mkdir -p /home/weipu/www/weipu2"
-            "rm -rf /home/weipu/www/weipu2/*"
-            "cp -a /home/weipu/download/artifacts/${{ steps.get_next_version.outputs.version }}/* /home/weipu/www/weipu2/"
-            "npm --prefix /home/weipu/www/weipu2/ install"
+            mkdir -p /home/weipu/www/weipu2
+            rm -rf /home/weipu/www/weipu2/*
+            cp -a /home/weipu/download/artifacts/${{ steps.get_next_version.outputs.version }}/* /home/weipu/www/weipu2/
+            npm --prefix /home/weipu/www/weipu2/ install
