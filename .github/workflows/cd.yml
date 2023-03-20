@@ -29,16 +29,7 @@ jobs:
         run: |
           echo ${{ steps.get_next_version.outputs.version }}
           echo ${{ steps.get_next_version.outputs.hasNextVersion }}
-
-      - name: Executing remote command
-        uses: appleboy/ssh-action@master
-        with:
-          HOST: ${{ secrets.HOST }}
-          USERNAME: ${{ secrets.USERNAME }}
-          PORT: ${{ secrets.PORT }}
-          KEY: ${{ secrets.SSHKEY }}
-          script: "mkdir -p /home/weipu/download/artifacts/${{ steps.get_next_version.outputs.version }}"
-          
+        
       - name: Upload weipu via scp
         uses: appleboy/scp-action@master
         with:
@@ -48,3 +39,12 @@ jobs:
           KEY: ${{ secrets.SSHKEY }}
           source: ".,!.git,!.github"
           target: "/home/weipu/download/artifacts/${{ steps.get_next_version.outputs.version }}"
+
+      - name: Executing remote command
+        uses: appleboy/ssh-action@master
+        with:
+          HOST: ${{ secrets.HOST }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PORT: ${{ secrets.PORT }}
+          KEY: ${{ secrets.SSHKEY }}
+          script: "mkdir -p /home/weipu/www/weipu2 && rm -rf /home/weipu/www/weipu2/* && cp -a /home/weipu/download/artifacts/${{ steps.get_next_version.outputs.version }}/* /home/weipu/www/weipu2/"
