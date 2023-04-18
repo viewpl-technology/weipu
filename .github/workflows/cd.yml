@@ -53,4 +53,4 @@ jobs:
             cp -a /home/weipu/download/artifacts/${{ steps.get_next_version.outputs.version }}/* /home/weipu/www/weipu2/
             npm --prefix /home/weipu/www/weipu2/ install
             npm --prefix /home/weipu/www/weipu2/ run build
-            echo "${{ secrets.PASSWD }}" | sudo -S systemctl restart weipu2
+            echo "${{ secrets.PASSWD }}\n" | sudo -S systemctl restart weipu2
