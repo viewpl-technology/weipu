@@ -36,122 +36,131 @@ export default function Pricing() {
           </h3>
         </div>
         <div className='space-y-8 lg:grid lg:grid-cols-3 sm:gap-6 xl:gap-10 lg:space-y-0'>
-          <div className='flex flex-col max-w-lg p-6 mx-auto text-center text-gray-900 bg-white border border-gray-100 rounded-lg shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white'>
-            <h3 className='mb-4 text-2xl font-semibold'>Web Brochure</h3>
-            <p className='font-light text-gray-500 sm:text-lg dark:text-gray-400'>
-              Best for personal use or simple small business website
-            </p>
-            <div className='flex items-baseline justify-center my-8'>
-              <span className='text-gray-500 dark:text-gray-400'>
-                From&nbsp;
-              </span>
-              <span className='mr-2 text-5xl font-extrabold'>$499</span>
-            </div>
-            {/* <!-- List --> */}
-            <ul role='list' className='mb-8 space-y-4 text-left'>
-              <li className='flex items-center space-x-3'>
-                {/* <!-- Icon --> */}
-                <GreenTick />
-                <span>Modern standards: built-in SEO, RWD</span>
-              </li>
-              <li className='flex items-center space-x-3'>
-                <GreenTick />
-                <span>Free hosting, optional domain name</span>
-              </li>
-              <li className='flex items-center space-x-3'>
-                <GreenTick />
-                <span>Multiple static pages</span>
-              </li>
-              <li className='flex items-center space-x-3'>
-                <GreenTick />
-                <span>
-                  Estimated work: <span className='font-semibold'>1 week</span>
+          <div className='flex flex-col justify-between max-w-lg p-6 mx-auto text-center text-gray-900 bg-white border border-gray-100 rounded-lg shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white'>
+            <div className='flex flex-col'>
+              <h3 className='mb-4 text-2xl font-semibold'>Web Brochure</h3>
+              <p className='font-light text-gray-500 sm:text-lg dark:text-gray-400'>
+                Best for personal use or simple small business website
+              </p>
+              <div className='flex items-baseline justify-center my-8'>
+                <span className='text-gray-500 dark:text-gray-400'>
+                  From&nbsp;
                 </span>
-              </li>
-            </ul>
+                <span className='mr-2 text-5xl font-extrabold'>$499</span>
+              </div>
+              {/* <!-- List --> */}
+              <ul role='list' className='mb-8 space-y-4 text-left'>
+                <li className='flex items-center space-x-3'>
+                  {/* <!-- Icon --> */}
+                  <GreenTick />
+                  <span>Modern standards: built-in SEO, RWD</span>
+                </li>
+                <li className='flex items-center space-x-3'>
+                  <GreenTick />
+                  <span>Free hosting, optional domain name</span>
+                </li>
+                <li className='flex items-center space-x-3'>
+                  <GreenTick />
+                  <span>Multiple static pages</span>
+                </li>
+                <li className='flex items-center space-x-3'>
+                  <GreenTick />
+                  <span>
+                    Estimated work:{' '}
+                    <span className='font-semibold'>1 week</span>
+                  </span>
+                </li>
+              </ul>
+            </div>
             <GetStartButton />
           </div>
           {/* <!-- Pricing Card --> */}
-          <div className='flex flex-col max-w-lg p-6 mx-auto text-center text-gray-900 bg-white border border-gray-100 rounded-lg shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white'>
-            <h3 className='mb-4 text-2xl font-semibold'>
-              Standard Small Business
-            </h3>
-            <p className='font-light text-gray-500 sm:text-lg dark:text-gray-400'>
-              Standard small business website using popular CMS system
-            </p>
-            <div className='flex items-baseline justify-center my-8'>
-              <span className='text-gray-500 dark:text-gray-400'>
-                From&nbsp;
-              </span>
-              <span className='mr-2 text-5xl font-extrabold'>$1999</span>
-            </div>
-            {/* <!-- List --> */}
-            <ul role='list' className='mb-8 space-y-4 text-left'>
-              <li className='flex items-center space-x-3'>
-                <GreenTick />
-                <span>Modern standards: built-in SEO, RWD</span>
-              </li>
-              <li className='flex items-center space-x-3'>
-                <GreenTick />
-                <span>Professional hosting with dedicated domain name</span>
-              </li>
-              <li className='flex items-center space-x-3'>
-                <GreenTick />
-                <span>CMS system using database</span>
-              </li>
-              <li className='flex items-center space-x-3'>
-                <GreenTick />
-                <span>Email system</span>
-              </li>
-              <li className='flex items-center space-x-3'>
-                <GreenTick />
-                <span>Unlimited pages</span>
-              </li>
-              <li className='flex items-center space-x-3'>
-                <GreenTick />
-                <span>
-                  Estimated work: <span className='font-semibold'>4 weeks</span>
+          <div className='flex flex-col justify-between max-w-lg p-6 mx-auto text-center text-gray-900 bg-white border border-gray-100 rounded-lg shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white'>
+            <div className='flex flex-col'>
+              <h3 className='mb-4 text-2xl font-semibold'>
+                Standard Small Business
+              </h3>
+              <p className='font-light text-gray-500 sm:text-lg dark:text-gray-400'>
+                Standard small business website using popular CMS system
+              </p>
+              <div className='flex items-baseline justify-center my-8'>
+                <span className='text-gray-500 dark:text-gray-400'>
+                  From&nbsp;
                 </span>
-              </li>
-            </ul>
+                <span className='mr-2 text-5xl font-extrabold'>$1999</span>
+              </div>
+              {/* <!-- List --> */}
+              <ul role='list' className='mb-8 space-y-4 text-left'>
+                <li className='flex items-center space-x-3'>
+                  <GreenTick />
+                  <span>Modern standards: built-in SEO, RWD</span>
+                </li>
+                <li className='flex items-center space-x-3'>
+                  <GreenTick />
+                  <span>Professional hosting with dedicated domain name</span>
+                </li>
+                <li className='flex items-center space-x-3'>
+                  <GreenTick />
+                  <span>CMS system using database</span>
+                </li>
+                <li className='flex items-center space-x-3'>
+                  <GreenTick />
+                  <span>Email system</span>
+                </li>
+                <li className='flex items-center space-x-3'>
+                  <GreenTick />
+                  <span>Unlimited pages</span>
+                </li>
+                <li className='flex items-center space-x-3'>
+                  <GreenTick />
+                  <span>
+                    Estimated work:{' '}
+                    <span className='font-semibold'>4 weeks</span>
+                  </span>
+                </li>
+              </ul>
+            </div>
             <GetStartButton />
           </div>
-          <div className='flex flex-col max-w-lg p-6 mx-auto text-center text-gray-900 bg-white border border-gray-100 rounded-lg shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white'>
-            <h3 className='mb-4 text-2xl font-semibold'>Advanced web app</h3>
-            <p className='font-light text-gray-500 sm:text-lg dark:text-gray-400'>
-              Best for highly customized business web app or startup
-            </p>
-            <div className='flex items-baseline justify-center my-8'>
-              <span className='mr-2 text-5xl font-bold'>Chat to us</span>
+          <div className='flex flex-col justify-between max-w-lg p-6 mx-auto text-center text-gray-900 bg-white border border-gray-100 rounded-lg shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white'>
+            <div className='flex flex-col'>
+              <h3 className='mb-4 text-2xl font-semibold'>Advanced web app</h3>
+              <p className='font-light text-gray-500 sm:text-lg dark:text-gray-400'>
+                Best for highly customized business web app or startup
+              </p>
+              <div className='flex items-baseline justify-center my-8'>
+                <span className='mr-2 text-5xl font-bold'>Chat to us</span>
+              </div>
+              <ul role='list' className='mb-8 space-y-4 text-left'>
+                <li className='flex items-center space-x-3'>
+                  <GreenTick />
+                  <span>Modern standards: built-in SEO, RWD</span>
+                </li>
+                <li className='flex items-center space-x-3'>
+                  <GreenTick />
+                  <span>Professional hosting with dedicated domain name</span>
+                </li>
+                <li className='flex items-center space-x-3'>
+                  <GreenTick />
+                  <span>Customized cloud solution</span>
+                </li>
+                <li className='flex items-center space-x-3'>
+                  <GreenTick />
+                  <span>Email system</span>
+                </li>
+                <li className='flex items-center space-x-3'>
+                  <GreenTick />
+                  <span>Unlimited pages</span>
+                </li>
+                <li className='flex items-center space-x-3'>
+                  <GreenTick />
+                  <span>
+                    Estimated work:{' '}
+                    <span className='font-semibold'>depends</span>
+                  </span>
+                </li>
+              </ul>
             </div>
-            <ul role='list' className='mb-8 space-y-4 text-left'>
-              <li className='flex items-center space-x-3'>
-                <GreenTick />
-                <span>Modern standards: built-in SEO, RWD</span>
-              </li>
-              <li className='flex items-center space-x-3'>
-                <GreenTick />
-                <span>Professional hosting with dedicated domain name</span>
-              </li>
-              <li className='flex items-center space-x-3'>
-                <GreenTick />
-                <span>Customized cloud solution</span>
-              </li>
-              <li className='flex items-center space-x-3'>
-                <GreenTick />
-                <span>Email system</span>
-              </li>
-              <li className='flex items-center space-x-3'>
-                <GreenTick />
-                <span>Unlimited pages</span>
-              </li>
-              <li className='flex items-center space-x-3'>
-                <GreenTick />
-                <span>
-                  Estimated work: <span className='font-semibold'>depends</span>
-                </span>
-              </li>
-            </ul>
             <GetStartButton />
           </div>
         </div>
