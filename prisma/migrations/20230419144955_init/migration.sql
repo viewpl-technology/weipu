@@ -5,14 +5,18 @@ CREATE TABLE "User" (
     "username" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "firstname" TEXT,
-    "lastname" TEXT
+    "lastname" TEXT,
+    "createdAt" DATETIME NOT NULL,
+    "modifiedAt" DATETIME NOT NULL,
+    "active" BOOLEAN NOT NULL
 );
 
 -- CreateTable
 CREATE TABLE "PostCategory" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "key" INTEGER NOT NULL,
-    "value" TEXT NOT NULL
+    "value" TEXT NOT NULL,
+    "active" BOOLEAN NOT NULL
 );
 
 -- CreateTable
@@ -22,6 +26,9 @@ CREATE TABLE "Post" (
     "content" TEXT,
     "categoryId" TEXT NOT NULL,
     "published" BOOLEAN NOT NULL DEFAULT false,
+    "createdAt" DATETIME NOT NULL,
+    "modifiedAt" DATETIME NOT NULL,
+    "active" BOOLEAN NOT NULL,
     "authorId" TEXT NOT NULL,
     CONSTRAINT "Post_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "PostCategory" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
     CONSTRAINT "Post_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
