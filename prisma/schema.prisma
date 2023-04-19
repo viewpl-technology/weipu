@@ -11,20 +11,24 @@ datasource db {
 }
 
 model User {
-  id        String  @id @default(cuid())
-  email     String  @unique
-  username  String  @unique
-  password  String
-  firstname String?
-  lastname  String?
-  posts     Post[]
+  id         String  @id @default(cuid())
+  email      String  @unique
+  username   String  @unique
+  password   String
+  firstname  String?
+  lastname   String?
+  createdAt  DateTime
+  modifiedAt DateTime
+  active     Boolean
+  posts      Post[]
 }
 
 model PostCategory {
-  id    String @id @default(cuid())
-  key   Int    @unique
-  value String
-  posts Post[]
+  id         String @id @default(cuid())
+  key        Int    @unique
+  value      String
+  active     Boolean
+  posts      Post[]
 }
 
 model Post {
@@ -35,5 +39,8 @@ model Post {
   categoryId String
   published  Boolean      @default(false)
   author     User         @relation(fields: [authorId], references: [id])
+  createdAt  DateTime
+  modifiedAt DateTime
+  active     Boolean
   authorId   String
 }
