@@ -6,8 +6,8 @@ CREATE TABLE "User" (
     "password" TEXT NOT NULL,
     "firstname" TEXT,
     "lastname" TEXT,
-    "createdAt" DATETIME NOT NULL,
-    "modifiedAt" DATETIME NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL,
     "active" BOOLEAN NOT NULL
 );
 
@@ -26,8 +26,8 @@ CREATE TABLE "Post" (
     "content" TEXT,
     "categoryId" TEXT NOT NULL,
     "published" BOOLEAN NOT NULL DEFAULT false,
-    "createdAt" DATETIME NOT NULL,
-    "modifiedAt" DATETIME NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL,
     "active" BOOLEAN NOT NULL,
     "authorId" TEXT NOT NULL,
     CONSTRAINT "Post_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "PostCategory" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
