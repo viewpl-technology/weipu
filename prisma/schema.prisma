@@ -17,8 +17,8 @@ model User {
   password   String
   firstname  String?
   lastname   String?
-  createdAt  DateTime
-  modifiedAt DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
   active     Boolean
   posts      Post[]
 }
@@ -39,8 +39,8 @@ model Post {
   categoryId String
   published  Boolean      @default(false)
   author     User         @relation(fields: [authorId], references: [id])
-  createdAt  DateTime
-  modifiedAt DateTime
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
   active     Boolean
   authorId   String
 }
