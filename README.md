@@ -15,6 +15,10 @@ Please follow conventional commits for this repository.
 
 More details: https://www.conventionalcommits.org/
 
+## Themesberg Landwind
+
+Thanks to https://github.com/themesberg/landwind for web page theme design
+
 # nextjs instructions
 
 ## Getting Started
