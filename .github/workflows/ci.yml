@@ -10,6 +10,8 @@ jobs:
         uses: actions/checkout@v3
       - name: npm install, build, and test
         run: |
+          echo "DATABASE_URL="file:../.sqlite/weipu.db"" >> .env
           npm install
+          npx prisma db push
           npm run build --if-present
           npm run test:ci
