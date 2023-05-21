@@ -12,7 +12,7 @@ export default function Blog({ posts }: { posts: Post[] }) {
         </div>
       </section>
       <section className='bg-white dark:bg-gray-900 pb-24'>
-        <div className='max-w-screen-xl mx-auto px-8 space-y-8 md:grid md:grid-cols-2 md:gap-12 md:space-y-0 dark:text-white'>
+        <div className='max-w-screen-xl mx-auto px-8 space-y-8 gap-16 md:grid md:grid-cols-2 md:gap-x-32 md:gap-y-16 md:space-y-0 dark:text-white'>
           {posts.map((post) => (
             <div key={post.id}>
               <h3 className='mb-2 text-2xl font-bold dark:text-white'>
