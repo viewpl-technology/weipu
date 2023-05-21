@@ -3,13 +3,29 @@ import { getPosts } from '../../lib/posts'
 
 export default function Blog({ posts }: { posts: Post[] }) {
   return (
-    <section className='bg-white dark:bg-gray-900'>
-      <div className='max-w-screen-xl px-4 py-8 mx-auto lg:py-24 lg:px-6 dark:text-white'>
-        {posts.map((post) => (
-          <div key={post.id}>{post.title}</div>
-        ))}
-      </div>
-    </section>
+    <>
+      <section className='bg-white dark:bg-gray-900'>
+        <div className='max-w-screen-xl px-4 pt-24 pb-1 mx-auto lg:px-6'>
+          <h2 className='mb-6 text-3xl font-extrabold tracking-tight text-center text-gray-900 lg:mb-8 lg:text-3xl dark:text-white'>
+            All Blogs
+          </h2>
+        </div>
+      </section>
+      <section className='bg-white dark:bg-gray-900 pb-24'>
+        <div className='max-w-screen-xl mx-auto px-8 space-y-8 md:grid md:grid-cols-2 md:gap-12 md:space-y-0 dark:text-white'>
+          {posts.map((post) => (
+            <div key={post.id}>
+              <h3 className='mb-2 text-2xl font-bold dark:text-white'>
+                {post.title}
+              </h3>
+              <p className='font-light text-gray-500 dark:text-gray-400 truncate text-ellipsis'>
+                {post.content}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+    </>
   )
 }
 

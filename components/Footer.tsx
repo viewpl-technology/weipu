@@ -1,9 +1,9 @@
-import Image from 'next/image';
+import Image from 'next/image'
 
 export default function Footer() {
   return (
     <footer className='bg-white dark:bg-gray-800'>
-      <div className='max-w-screen-xl p-4 py-6 mx-auto lg:py-16 md:p-8 lg:p-10'>
+      <div className='max-w-screen-xl p-4 py-6 mx-auto lg:py-8 md:p-8 lg:p-10'>
         <div className='grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-3'>
           <div>
             <ul className='text-gray-500 dark:text-gray-400'>
@@ -48,7 +48,7 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-        <hr className='my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8' />
+        <hr className='my-4 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-4' />
         <div className='flex flex-row justify-evenly items-center gap-x-24'>
           <div className='flex items-center text-sm text-center text-gray-500 gap-1 dark:text-gray-400'>
             <a
@@ -117,5 +117,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  );
+  )
 }
