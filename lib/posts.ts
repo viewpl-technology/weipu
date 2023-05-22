@@ -28,3 +28,20 @@ export async function getPosts(
     updatedAt: post.updatedAt.toJSON(),
   }))
 }
+
+export async function getPost(id: string) {
+  const post = await prisma.post.findUniqueOrThrow({ where: { id } })
+  return post
+}
+
+export async function getBlogIds() {
+  const blogs = await prisma.post.findMany({
+    where: { category: { key: PostCategories.blog } },
+  })
+
+  return blogs.map((post) => ({
+    params: {
+      id: post.id,
+    },
+  }))
+}
