@@ -16,7 +16,7 @@ export default function Blog({ posts }: { posts: Post[] }) {
           {posts.map((post) => (
             <div key={post.id}>
               <h3 className='mb-2 text-2xl font-bold dark:text-white'>
-                {post.title}
+                <a href={`blog/${post.id}`}>{post.title}</a>
               </h3>
               <p className='font-light text-gray-500 dark:text-gray-400 truncate text-ellipsis'>
                 {post.content}
