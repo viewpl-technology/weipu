@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import { Post } from '@prisma/client'
 import { getPosts } from '../../lib/posts'
 
@@ -15,10 +16,13 @@ export default function Blog({ posts }: { posts: Post[] }) {
         <div className='max-w-screen-xl mx-auto px-8 space-y-8 gap-16 md:grid md:grid-cols-2 md:gap-x-32 md:gap-y-16 md:space-y-0 dark:text-white'>
           {posts.map((post) => (
             <div key={post.id}>
-              <h3 className='mb-2 text-2xl font-bold dark:text-white'>
+              <h3 className='text-2xl font-bold dark:text-white'>
                 <a href={`blog/${post.id}`}>{post.title}</a>
               </h3>
-              <p className='font-light text-gray-500 dark:text-gray-400 truncate text-ellipsis'>
+              <p className='font-light text-gray-500 dark:text-gray-400'>
+                {dayjs(post.createdAt).format('DD/MM/YYYY')}
+              </p>
+              <p className='font-normal text-xl text-gray-600 dark:text-gray-300 truncate text-ellipsis'>
                 {post.content}
               </p>
             </div>
