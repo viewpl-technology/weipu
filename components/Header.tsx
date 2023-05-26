@@ -1,21 +1,21 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import DarkSystemLight from './DarkSystemLight';
+import Image from 'next/image'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import DarkSystemLight from './DarkSystemLight'
 
 export default function Header() {
-  const router = useRouter();
-  const currentRoute = router.pathname;
+  const router = useRouter()
+  const currentRoute = router.pathname
   const activeClassNames =
-    'block py-2 pl-3 pr-4 text-white bg-purple-700 rounded lg:bg-transparent lg:text-orange-500 lg:p-0 dark:text-white';
+    'block py-2 pl-3 pr-4 text-white bg-purple-700 rounded lg:bg-transparent lg:text-orange-500 lg:p-0 dark:text-white'
   const inactiveClassNames =
-    'block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-orange-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700';
+    'block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-orange-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700'
 
   return (
     <header className='fixed w-full'>
       <nav className='bg-white border-gray-200 py-2.5 dark:bg-gray-900'>
-        <div className='flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto'>
-          <a href='#' className='flex items-center gap-3'>
+        <div className='flex flex-nowrap items-center justify-between max-w-screen-xl px-4 mx-auto'>
+          <a href='#' className='flex items-center gap-3 overflow-hidden'>
             <span className='text-viewpl'>Viewpl</span>
             <span className='text-technology'>technology</span>
           </a>
@@ -106,5 +106,5 @@ export default function Header() {
         </div>
       </nav>
     </header>
-  );
+  )
 }
