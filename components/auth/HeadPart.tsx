@@ -4,7 +4,7 @@ export default function HeadPart() {
   return (
     <>
       <Head>
-        <title>Viewpl Technology - Dashboard</title>
+        <title>Viewpl Technology - Authentication</title>
       </Head>
     </>
   )
