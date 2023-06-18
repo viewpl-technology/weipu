@@ -1,6 +1,9 @@
 import { ReactElement } from 'react'
+import { GetServerSidePropsContext } from 'next'
+import { getServerSession } from 'next-auth/next'
 import Layout from '../../components/dashboard/layout'
 import styles from '../styles/dashboard.module.css'
+import { authOptions } from '../api/auth/[...nextauth]'
 
 export default function Dashboard() {
   return (
@@ -547,3 +550,22 @@ export default function Dashboard() {
 }
 
 Dashboard.getLayout = (page: ReactElement) => <Layout>{page}</Layout>
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { req, res } = context
+  const session = await getServerSession(req, res, authOptions)
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/api/auth/signin?callbackUrl=%2Fdashboard',
+        permanent: false,
+      },
+    }
+  }
+
+  return {
+    props: {
+      session,
+    },
+  }
+}
