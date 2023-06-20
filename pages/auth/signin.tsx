@@ -1,8 +1,55 @@
-import { ReactElement } from 'react'
+import { FormEventHandler, ReactElement } from 'react'
 import Link from 'next/link'
+import { useForm, Resolver, SubmitHandler } from 'react-hook-form'
+import { signIn } from 'next-auth/react'
+
 import Layout from '../../components/auth/layout'
 
+type FormValues = {
+  email: string
+  password: string
+}
+
+const resolver: Resolver<FormValues> = async (values) => {
+  return {
+    values,
+    errors: {
+      ...(!values.email
+        ? {
+            email: {
+              type: 'required',
+              message: 'Email is required',
+            },
+          }
+        : {}),
+      ...(!values.password
+        ? {
+            password: {
+              type: 'required',
+              message: 'Password is required',
+            },
+          }
+        : {}),
+    },
+  }
+}
+
 export default function SignIn() {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<FormValues>({ resolver })
+  const onSubmit: SubmitHandler<FormValues> = ({ email, password }) => {
+    signIn('credentials', { username: email, password })
+  }
+
+  const onReset: FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault()
+    reset()
+  }
+
   return (
     <>
       <div className='flex items-end'>
@@ -16,7 +63,12 @@ export default function SignIn() {
           </Link>
         </div>
       </div>
-      <form className='mt-8 space-y-6' action='#'>
+      <form
+        className='mt-8 space-y-6'
+        action='/api/auth/callback/credentials'
+        onSubmit={handleSubmit(onSubmit)}
+        onReset={onReset}
+      >
         <div>
           <label
             htmlFor='email'
@@ -24,10 +76,14 @@ export default function SignIn() {
           >
             Email
           </label>
+          {errors?.email && (
+            <div className='font-medium text-red-600'>
+              {errors.email.message}
+            </div>
+          )}
           <input
             type='email'
-            name='email'
-            id='email'
+            {...register('email')}
             className='bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5'
             placeholder='name@company.com'
           />
@@ -39,10 +95,14 @@ export default function SignIn() {
           >
             Password
           </label>
+          {errors?.password && (
+            <div className='font-medium text-red-600'>
+              {errors.password.message}
+            </div>
+          )}
           <input
             type='password'
-            name='password'
-            id='password'
+            {...register('password')}
             placeholder='••••••••••'
             className='bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5'
           />
@@ -71,6 +131,13 @@ export default function SignIn() {
           className='text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-base px-5 py-3 w-full sm:w-auto text-center'
         >
           Submit
+        </button>
+        &nbsp;
+        <button
+          type='reset'
+          className='text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-base px-5 py-3 w-full sm:w-auto text-center'
+        >
+          Reset
         </button>
       </form>
     </>

@@ -137,6 +137,12 @@ export default function Header() {
                 </svg>
                 Upgrade to Pro
               </a>
+              <Link
+                className='sm:inline-flex text-gray-600 font-medium text-sm py-2.5 text-center'
+                href='/api/auth/signout'
+              >
+                Sign Out
+              </Link>
             </div>
           </div>
         </div>
