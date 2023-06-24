@@ -6,7 +6,7 @@ export default function SignUp() {
   return (
     <>
       <div className='flex items-end'>
-        <h2 className='grow text-2xl lg:text-3xl font-bold text-gray-900'>
+        <h2 className='grow text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white'>
           Sign up
         </h2>
         <div className='text-sm font-medium text-gray-500'>
@@ -20,7 +20,7 @@ export default function SignUp() {
         <div>
           <label
             htmlFor='email'
-            className='text-base font-medium text-gray-900 block mb-2'
+            className='text-base font-medium text-gray-900 dark:text-white block mb-2'
           >
             Email
           </label>
@@ -35,7 +35,7 @@ export default function SignUp() {
         <div>
           <label
             htmlFor='password'
-            className='text-base font-medium text-gray-900 block mb-2'
+            className='text-base font-medium text-gray-900 dark:text-white block mb-2'
           >
             Password
           </label>
@@ -50,7 +50,7 @@ export default function SignUp() {
         <div>
           <label
             htmlFor='confirm-password'
-            className='text-sm font-medium text-gray-900 block mb-2'
+            className='text-sm font-medium text-gray-900 dark:text-white block mb-2'
           >
             Confirm password
           </label>
@@ -73,7 +73,10 @@ export default function SignUp() {
             />
           </div>
           <div className='text-sm ml-3'>
-            <label htmlFor='remember' className='font-medium text-gray-900'>
+            <label
+              htmlFor='remember'
+              className='font-medium text-gray-900 dark:text-white'
+            >
               I accept the&nbsp;
               <Link href='#' className='text-teal-500 hover:underline'>
                 Terms and Conditions

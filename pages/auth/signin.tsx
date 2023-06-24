@@ -119,9 +119,7 @@ export default function SignIn() {
     <>
       {errors?.root && <RootError error={errors.root.message ?? ''} />}
       <div className='flex items-end'>
-        <h3 className='grow text-2xl lg:text-3xl font-bold text-gray-900'>
-          Sign in
-        </h3>
+        <h3 className='grow text-2xl lg:text-3xl font-bold'>Sign in</h3>
         <div className='text-sm font-medium text-gray-500'>
           Not registered?&nbsp;
           <Link href='/auth/signup' className='text-teal-500 hover:underline'>
@@ -136,10 +134,7 @@ export default function SignIn() {
         onReset={onReset}
       >
         <div>
-          <label
-            htmlFor='email'
-            className='text-base font-medium text-gray-900 block mb-2'
-          >
+          <label htmlFor='email' className='text-base font-medium block mb-2'>
             Email
           </label>
           {errors?.email && (
@@ -157,7 +152,7 @@ export default function SignIn() {
         <div>
           <label
             htmlFor='password'
-            className='text-base font-medium text-gray-900 block mb-2'
+            className='text-base font-medium block mb-2'
           >
             Password
           </label>
@@ -184,7 +179,7 @@ export default function SignIn() {
             />
           </div>
           <div className='text-sm ml-3'>
-            <label htmlFor='remember' className='font-medium text-gray-900'>
+            <label htmlFor='remember' className='font-medium'>
               Remember me
             </label>
           </div>
