@@ -1,4 +1,6 @@
 import { ReactElement } from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
 import Layout from '../../components/dashboard/layout'
 import styles from '../styles/dashboard.module.css'
 
@@ -25,9 +27,9 @@ export default function Dashboard() {
                 xmlns='http://www.w3.org/2000/svg'
               >
                 <path
-                  fill-rule='evenodd'
+                  fillRule='evenodd'
                   d='M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z'
-                  clip-rule='evenodd'
+                  clipRule='evenodd'
                 ></path>
               </svg>
             </div>
@@ -46,12 +48,12 @@ export default function Dashboard() {
               </span>
             </div>
             <div className='flex-shrink-0'>
-              <a
+              <Link
                 href='#'
                 className='text-sm font-medium text-cyan-600 hover:bg-gray-100 rounded-lg p-2'
               >
                 View all
-              </a>
+              </Link>
             </div>
           </div>
           {/* <!-- Table --> */}
@@ -197,9 +199,9 @@ export default function Dashboard() {
                 xmlns='http://www.w3.org/2000/svg'
               >
                 <path
-                  fill-rule='evenodd'
+                  fillRule='evenodd'
                   d='M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z'
-                  clip-rule='evenodd'
+                  clipRule='evenodd'
                 ></path>
               </svg>
             </div>
@@ -225,9 +227,9 @@ export default function Dashboard() {
                 xmlns='http://www.w3.org/2000/svg'
               >
                 <path
-                  fill-rule='evenodd'
+                  fillRule='evenodd'
                   d='M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z'
-                  clip-rule='evenodd'
+                  clipRule='evenodd'
                 ></path>
               </svg>
             </div>
@@ -253,9 +255,9 @@ export default function Dashboard() {
                 xmlns='http://www.w3.org/2000/svg'
               >
                 <path
-                  fill-rule='evenodd'
+                  fillRule='evenodd'
                   d='M14.707 12.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l2.293-2.293a1 1 0 011.414 0z'
-                  clip-rule='evenodd'
+                  clipRule='evenodd'
                 ></path>
               </svg>
             </div>
@@ -269,22 +271,24 @@ export default function Dashboard() {
             <h3 className='text-xl font-bold leading-none text-gray-900'>
               Latest Customers
             </h3>
-            <a
+            <Link
               href='#'
               className='text-sm font-medium text-cyan-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2'
             >
               View all
-            </a>
+            </Link>
           </div>
           <div className='flow-root'>
             <ul role='list' className='divide-y divide-gray-200'>
               <li className='py-3 sm:py-4'>
                 <div className='flex items-center space-x-4'>
                   <div className='flex-shrink-0'>
-                    <img
+                    <Image
                       className='h-8 w-8 rounded-full'
-                      src='http://localhost:1313/windster/images/users/neil-sims.png'
+                      src='/images/users/neil-sims.png'
                       alt='Neil image'
+                      width={150}
+                      height={150}
                     />
                   </div>
                   <div className='flex-1 min-w-0'>
@@ -303,10 +307,12 @@ export default function Dashboard() {
               <li className='py-3 sm:py-4'>
                 <div className='flex items-center space-x-4'>
                   <div className='flex-shrink-0'>
-                    <img
+                    <Image
                       className='h-8 w-8 rounded-full'
-                      src='http://localhost:1313/windster/images/users/bonnie-green.png'
+                      src='/images/users/bonnie-green.png'
                       alt='Neil image'
+                      width={150}
+                      height={150}
                     />
                   </div>
                   <div className='flex-1 min-w-0'>
@@ -325,10 +331,12 @@ export default function Dashboard() {
               <li className='py-3 sm:py-4'>
                 <div className='flex items-center space-x-4'>
                   <div className='flex-shrink-0'>
-                    <img
+                    <Image
                       className='h-8 w-8 rounded-full'
-                      src='http://localhost:1313/windster/images/users/michael-gough.png'
+                      src='/images/users/michael-gough.png'
                       alt='Neil image'
+                      width={150}
+                      height={150}
                     />
                   </div>
                   <div className='flex-1 min-w-0'>
@@ -347,10 +355,12 @@ export default function Dashboard() {
               <li className='py-3 sm:py-4'>
                 <div className='flex items-center space-x-4'>
                   <div className='flex-shrink-0'>
-                    <img
+                    <Image
                       className='h-8 w-8 rounded-full'
-                      src='http://localhost:1313/windster/images/users/thomas-lean.png'
+                      src='/images/users/thomas-lean.png'
                       alt='Neil image'
+                      width={150}
+                      height={150}
                     />
                   </div>
                   <div className='flex-1 min-w-0'>
@@ -369,10 +379,12 @@ export default function Dashboard() {
               <li className='pt-3 sm:pt-4 pb-0'>
                 <div className='flex items-center space-x-4'>
                   <div className='flex-shrink-0'>
-                    <img
+                    <Image
                       className='h-8 w-8 rounded-full'
-                      src='http://localhost:1313/windster/images/users/lana-byrd.png'
+                      src='/images/users/lana-byrd.png'
                       alt='Neil image'
+                      width={150}
+                      height={150}
                     />
                   </div>
                   <div className='flex-1 min-w-0'>
