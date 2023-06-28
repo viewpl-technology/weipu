@@ -1,4 +1,4 @@
-import { ReactElement } from 'react'
+import { FormEventHandler, ReactElement } from 'react'
 import Link from 'next/link'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
