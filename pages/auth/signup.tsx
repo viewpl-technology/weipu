@@ -241,6 +241,6 @@ export default function SignUp() {
 
 SignUp.getLayout = (page: ReactElement) => <Layout>{page}</Layout>
 
-export const getServerSideProps = setup(async ({ req, res }) => {
+export const getServerSideProps = setup(async (req, res) => {
   return { props: {} }
 })
