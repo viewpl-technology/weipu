@@ -1,8 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import type { User } from '@prisma/client'
 import { createUser } from '../../../lib/users'
+import { csrf } from '../../../lib/csrf'
 
-export default async function handler(
+async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Omit<User, 'password'> | string>
 ) {
@@ -25,3 +26,5 @@ export default async function handler(
     return res.status(400).send('Bad request')
   }
 }
+
+export default csrf(handler)
