@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 import { useForm, Resolver, SubmitHandler } from 'react-hook-form'
-
+import { setup } from '../../lib/csrf'
 import { client } from '../../lib/client'
 
 import Layout from '../../components/auth/layout'
@@ -240,3 +240,7 @@ export default function SignUp() {
 }
 
 SignUp.getLayout = (page: ReactElement) => <Layout>{page}</Layout>
+
+export const getServerSideProps = setup(async ({ req, res }) => {
+  return { props: {} }
+})
