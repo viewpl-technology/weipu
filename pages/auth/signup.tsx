@@ -4,6 +4,8 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 import { useForm, Resolver, SubmitHandler } from 'react-hook-form'
 import { createCaptcha } from '@viewpl-technology/svg-captcha'
+import { createHmac } from 'node:crypto'
+
 import { setup } from '../../lib/csrf'
 import { client } from '../../lib/client'
 
@@ -114,7 +116,8 @@ export default function SignUp({ captcha }: Props) {
       })
       .catch((err) => {
         setError('root', {
-          message: 'Failed to sign up due to error: ' + err,
+          message:
+            'Failed to sign up due to the error: ' + (err?.message ?? err),
         })
       })
   }
@@ -292,7 +295,10 @@ export const getServerSideProps = setup(async (req, res) => {
         .map((x) => x.split('='))
         .find((x) => x[0] == 'csrfSecret')
       if (csrf) {
-        const captcha = createCaptcha(csrf[1].substring(0, 4), {
+        const hmac = createHmac('sha256', process.env.NEXTAUTH_SECRET as string)
+        hmac.update(csrf[1])
+        const hex = hmac.digest('hex')
+        const captcha = createCaptcha(hex.substring(0, 4), {
           noise: 2,
           background: '#F3F4F6', // gray-100
         })

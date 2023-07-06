@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import type { User } from '@prisma/client'
+import { createHmac } from 'node:crypto'
 import { createUser } from '../../../lib/users'
 import { csrf } from '../../../lib/csrf'
 
@@ -11,9 +12,13 @@ async function handler(
     if (!req.body?.email || !req.body?.password || !req.body?.captcha) {
       return res.status(400).json('Bad request')
     }
+    const hmac = createHmac('sha256', process.env.NEXTAUTH_SECRET as string)
+    hmac.update(req.cookies['csrfSecret'] as string)
+    const hex = hmac.digest('hex')
+
     if (
       `${req.body?.captcha}`.toLowerCase() !==
-      `${req.cookies['csrfSecret']}`?.substring(0, 4).toLowerCase()
+      `${hex}`.substring(0, 4).toLowerCase()
     ) {
       return res.status(400).json('Failed to pass CAPTCHA')
     }
@@ -23,8 +28,8 @@ async function handler(
         email: req.body.email,
         password: req.body.password,
       })
-    } catch (err) {
-      return res.status(500).send('Failed to create user')
+    } catch (err: any) {
+      return res.status(500).send('An error occurred when creating the user')
     }
 
     if (user && user.id) {
