@@ -3,11 +3,12 @@ import Link from 'next/link'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 import { useForm, Resolver, SubmitHandler } from 'react-hook-form'
+import { createCaptcha } from '@viewpl-technology/svg-captcha'
 import { setup } from '../../lib/csrf'
 import { client } from '../../lib/client'
 
 import Layout from '../../components/auth/layout'
-
+import { SvgCaptcha } from '../../components/SvgCaptcha'
 import { RootError } from '../../components/RootError'
 
 type FormValues = {
@@ -15,6 +16,7 @@ type FormValues = {
   password: string
   confirmPassword: string
   acceptTerms: boolean
+  captcha: string
 }
 
 const resolver: Resolver<FormValues> = async (values) => {
@@ -60,11 +62,23 @@ const resolver: Resolver<FormValues> = async (values) => {
             },
           }
         : {}),
+      ...(!values.captcha
+        ? {
+            captcha: {
+              type: 'required',
+              message: 'CAPTCHA is required',
+            },
+          }
+        : {}),
     },
   }
 }
 
-export default function SignUp() {
+type Props = {
+  captcha: string
+}
+
+export default function SignUp({ captcha }: Props) {
   const {
     register,
     handleSubmit,
@@ -77,8 +91,12 @@ export default function SignUp() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const callbackUrl = searchParams.get('callbackUrl') || '/dashboard'
-  const onSubmit: SubmitHandler<FormValues> = async ({ email, password }) => {
-    client('/api/users/create', { body: { email, password } })
+  const onSubmit: SubmitHandler<FormValues> = async ({
+    email,
+    password,
+    captcha,
+  }) => {
+    client('/api/users/create', { body: { email, password, captcha } })
       .then((res) => {
         signIn('credentials', {
           username: email,
@@ -95,8 +113,9 @@ export default function SignUp() {
           })
       })
       .catch((err) => {
-        setError('root', { message: 'Failed to sign up' })
-        console.error(err)
+        setError('root', {
+          message: 'Failed to sign up due to error: ' + err,
+        })
       })
   }
 
@@ -221,6 +240,28 @@ export default function SignUp() {
             </div>
           </div>
         </div>
+        <div>
+          <label
+            htmlFor='captcha'
+            className='text-base font-medium text-gray-900 dark:text-white block mb-2'
+          >
+            CAPTCHA
+          </label>
+          <SvgCaptcha className='w-150 w-px' svgHtmlRaw={captcha} />
+        </div>
+        <div>
+          {errors?.captcha && (
+            <div className='font-medium text-red-600'>
+              {errors.captcha.message}
+            </div>
+          )}
+          <input
+            {...register('captcha')}
+            type='text'
+            id='captcha'
+            className='bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5'
+          />
+        </div>
         <button
           type='submit'
           className='text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-base px-5 py-3 w-full sm:w-auto text-center'
@@ -242,5 +283,23 @@ export default function SignUp() {
 SignUp.getLayout = (page: ReactElement) => <Layout>{page}</Layout>
 
 export const getServerSideProps = setup(async (req, res) => {
+  const setCookies = res.getHeader('set-cookie')
+  if (Array.isArray(setCookies)) {
+    const csrfCookie = setCookies.find((item) => item.includes('csrfSecret'))
+    if (csrfCookie) {
+      const csrf = csrfCookie
+        .split(';')
+        .map((x) => x.split('='))
+        .find((x) => x[0] == 'csrfSecret')
+      if (csrf) {
+        const captcha = createCaptcha(csrf[1].substring(0, 4), {
+          noise: 2,
+          background: '#F3F4F6', // gray-100
+        })
+
+        return { props: { captcha } }
+      }
+    }
+  }
   return { props: {} }
 })
