@@ -8,14 +8,25 @@ async function handler(
   res: NextApiResponse<Omit<User, 'password'> | string>
 ) {
   if (req.method === 'POST') {
-    if (!req.body?.email || !req.body?.password) {
+    if (!req.body?.email || !req.body?.password || !req.body?.captcha) {
       return res.status(400).json('Bad request')
     }
+    if (
+      `${req.body?.captcha}`.toLowerCase() !==
+      `${req.cookies['csrfSecret']}`?.substring(0, 4).toLowerCase()
+    ) {
+      return res.status(400).json('Failed to pass CAPTCHA')
+    }
+    let user
+    try {
+      user = await createUser({
+        email: req.body.email,
+        password: req.body.password,
+      })
+    } catch (err) {
+      return res.status(500).send('Failed to create user')
+    }
 
-    const user = await createUser({
-      email: req.body.email,
-      password: req.body.password,
-    })
     if (user && user.id) {
       const { password, ...userWithoutPasword } = user
       return res.status(200).json(userWithoutPasword)
