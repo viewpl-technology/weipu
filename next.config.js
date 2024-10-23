@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
+  basePath: '/weipu2',
   reactStrictMode: true,
   async redirects() {
     return [
