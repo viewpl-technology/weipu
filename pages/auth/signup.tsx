@@ -250,7 +250,7 @@ export default function SignUp({ captcha }: Props) {
           >
             CAPTCHA
           </label>
-          <SvgCaptcha className='w-150 w-px' svgHtmlRaw={captcha} />
+          <SvgCaptcha className='w-150 w-px' svgHtmlRaw={captcha ?? 'TBC0'} />
         </div>
         <div>
           {errors?.captcha && (
@@ -284,28 +284,3 @@ export default function SignUp({ captcha }: Props) {
 }
 
 SignUp.getLayout = (page: ReactElement) => <Layout>{page}</Layout>
-
-export const getServerSideProps = setup(async (req, res) => {
-  const setCookies = res.getHeader('set-cookie')
-  if (Array.isArray(setCookies)) {
-    const csrfCookie = setCookies.find((item) => item.includes('csrfSecret'))
-    if (csrfCookie) {
-      const csrf = csrfCookie
-        .split(';')
-        .map((x) => x.split('='))
-        .find((x) => x[0] == 'csrfSecret')
-      if (csrf) {
-        const hmac = createHmac('sha256', process.env.NEXTAUTH_SECRET as string)
-        hmac.update(csrf[1])
-        const hex = hmac.digest('hex')
-        const captcha = createCaptcha(hex.substring(0, 4), {
-          noise: 2,
-          background: '#F3F4F6', // gray-100
-        })
-
-        return { props: { captcha } }
-      }
-    }
-  }
-  return { props: {} }
-})
