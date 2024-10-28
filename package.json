@@ -3,9 +3,6 @@
   "version": "0.1.5",
   "private": true,
   "license": "MIT",
-  "prisma": {
-    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} .sqlite/seed.ts"
-  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -20,7 +17,6 @@
     }
   },
   "dependencies": {
-    "@prisma/client": "4.12.0",
     "@viewpl-technology/svg-captcha": "^1.5.3",
     "bcrypt": "^5.1.0",
     "dayjs": "^1.11.7",
@@ -28,7 +24,6 @@
     "html-react-parser": "^4.0.0",
     "next-auth": "^4.22.1",
     "next-csrf": "^0.2.1",
-    "prisma": "^4.13.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.45.0"
