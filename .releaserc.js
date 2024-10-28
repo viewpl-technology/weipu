@@ -14,6 +14,5 @@ module.exports = {
       },
     ],
   ],
-  dryRun: true,
   ci: false,
 }
