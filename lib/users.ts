@@ -1,5 +1,4 @@
 import bcrypt from 'bcrypt'
-import prisma from './prisma'
 
 export type CreateUserInput = {
   email: string
@@ -10,7 +9,9 @@ export type CreateUserInput = {
   active?: boolean
 }
 
-export async function createUser(input: CreateUserInput) {
+export async function createUser(
+  input: CreateUserInput
+): Promise<{ id: string; password: string }> {
   const user = {
     ...input,
     username: input.username ?? input.email,
@@ -18,7 +19,5 @@ export async function createUser(input: CreateUserInput) {
     active: input.active ?? true,
   }
 
-  return await prisma.user.create({
-    data: user,
-  })
+  return { id: '', password: '' }
 }

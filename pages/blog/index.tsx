@@ -1,6 +1,13 @@
 import dayjs from 'dayjs'
-import { Post } from '@prisma/client'
 import { getPosts } from '../../lib/posts'
+
+type Post = {
+  id: string
+  title: string
+  content: string
+  createdAt: string
+  updatedAt: string
+}
 
 export default function Blog({ posts }: { posts: Post[] }) {
   return (

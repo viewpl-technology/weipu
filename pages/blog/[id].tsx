@@ -1,6 +1,13 @@
 import dayjs from 'dayjs'
-import { Post } from '@prisma/client'
 import { getBlogIds, getPost } from '../../lib/posts'
+
+type Post = {
+  id: string
+  title: string
+  content: string
+  createdAt: string
+  updatedAt: string
+}
 
 export default function Blog({ post }: { post: Post }) {
   return (
@@ -34,14 +41,10 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }: { params: { id: string } }) {
-  const post = await getPost(params.id)
+  const post: Post | null = await getPost(params.id)
   return {
     props: {
-      post: {
-        ...post,
-        createdAt: post.createdAt.toJSON(),
-        updatedAt: post.updatedAt.toJSON(),
-      },
+      post,
     },
   }
 }
