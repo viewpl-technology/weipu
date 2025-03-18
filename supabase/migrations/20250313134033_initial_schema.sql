@@ -51,15 +51,15 @@ CREATE POLICY "Post categories are viewable by everyone"
   FOR SELECT 
   USING (true);
 
-CREATE POLICY "Only authenticated users can insert post categories" 
+CREATE POLICY "Only admins can insert post categories" 
   ON public.post_categories 
   FOR INSERT 
-  WITH CHECK (auth.role() = 'authenticated');
+  WITH CHECK ((auth.jwt() -> 'app_metadata' ->> 'role')::text = 'admin');
 
-CREATE POLICY "Only authenticated users can update post categories" 
+CREATE POLICY "Only admins can update post categories" 
   ON public.post_categories 
   FOR UPDATE 
-  USING (auth.role() = 'authenticated');
+  USING ((auth.jwt() -> 'app_metadata' ->> 'role')::text = 'admin');
 
 -- Blog posts
 CREATE TABLE IF NOT EXISTS public.posts (
@@ -96,6 +96,16 @@ CREATE POLICY "Users can update their own posts"
   ON public.posts 
   FOR UPDATE 
   USING (auth.uid() = author_id);
+
+CREATE POLICY "Only admins can insert posts" 
+  ON public.posts 
+  FOR INSERT 
+  WITH CHECK ((auth.jwt() -> 'app_metadata' ->> 'role')::text = 'admin');
+
+CREATE POLICY "Only admins can update posts" 
+  ON public.posts 
+  FOR UPDATE 
+  USING ((auth.jwt() -> 'app_metadata' ->> 'role')::text = 'admin');
 
 -- Functions and triggers
 
