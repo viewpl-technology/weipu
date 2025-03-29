@@ -1,15 +1,26 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useAuth } from '../contexts/auth'
 import DarkSystemLight from './DarkSystemLight'
 
 export default function Header() {
   const router = useRouter()
   const currentRoute = router.pathname
+  const { user, loading, signOut } = useAuth()
+
   const activeClassNames =
     'block py-2 pl-3 pr-4 text-white bg-purple-700 rounded lg:bg-transparent lg:text-orange-500 lg:p-0 dark:text-white'
   const inactiveClassNames =
     'block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-orange-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700'
+
+  const handleSignOut = async (e: React.MouseEvent) => {
+    e.preventDefault()
+    try {
+      await signOut()
+    } catch (error) {
+      console.error('Sign out error:', error)
+    }
+  }
 
   return (
     <header className='fixed w-full'>
@@ -21,12 +32,38 @@ export default function Header() {
           </a>
           <div className='flex items-center lg:order-2'>
             <DarkSystemLight />
-            {/* <a
-              href='#'
-              className='text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800'
-            >
-              Log in
-            </a> */}
+
+            {!loading && (
+              <>
+                {user ? (
+                  <div className='flex items-center gap-4'>
+                    <span className='hidden md:inline text-gray-600 dark:text-gray-300'>
+                      {user.email}
+                    </span>
+                    <Link
+                      href='/dashboard'
+                      className='text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800'
+                    >
+                      Dashboard
+                    </Link>
+                    <button
+                      onClick={handleSignOut}
+                      className='text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 dark:bg-orange-600 dark:hover:bg-orange-700 focus:outline-none dark:focus:ring-orange-800'
+                    >
+                      Sign Out
+                    </button>
+                  </div>
+                ) : (
+                  <Link
+                    href='/auth/signin'
+                    className='text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800'
+                  >
+                    Sign In
+                  </Link>
+                )}
+              </>
+            )}
+
             <button
               data-collapse-toggle='mobile-menu-2'
               type='button'

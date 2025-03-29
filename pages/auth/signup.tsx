@@ -1,16 +1,11 @@
-import { FormEventHandler, ReactElement } from 'react'
+// pages/auth/signup.tsx
+import { FormEventHandler, ReactElement, useState } from 'react'
 import Link from 'next/link'
-import { useSearchParams, useRouter } from 'next/navigation'
-import { signIn } from 'next-auth/react'
+import { useRouter } from 'next/router'
 import { useForm, Resolver, SubmitHandler } from 'react-hook-form'
-import { createCaptcha } from '@viewpl-technology/svg-captcha'
-import { createHmac } from 'node:crypto'
-
-import { setup } from '../../lib/csrf'
-import { client } from '../../lib/client'
+import { supabase } from '../../lib/supabase'
 
 import Layout from '../../components/auth/layout'
-import { SvgCaptcha } from '../../components/SvgCaptcha'
 import { RootError } from '../../components/RootError'
 
 type FormValues = {
@@ -18,7 +13,6 @@ type FormValues = {
   password: string
   confirmPassword: string
   acceptTerms: boolean
-  captcha: string
 }
 
 const resolver: Resolver<FormValues> = async (values) => {
@@ -38,6 +32,13 @@ const resolver: Resolver<FormValues> = async (values) => {
             password: {
               type: 'required',
               message: 'Password is required',
+            },
+          }
+        : values.password.length < 6
+        ? {
+            password: {
+              type: 'minLength',
+              message: 'Password must be at least 6 characters',
             },
           }
         : {}),
@@ -64,23 +65,11 @@ const resolver: Resolver<FormValues> = async (values) => {
             },
           }
         : {}),
-      ...(!values.captcha
-        ? {
-            captcha: {
-              type: 'required',
-              message: 'CAPTCHA is required',
-            },
-          }
-        : {}),
     },
   }
 }
 
-type Props = {
-  captcha: string
-}
-
-export default function SignUp({ captcha }: Props) {
+export default function SignUp() {
   const {
     register,
     handleSubmit,
@@ -90,41 +79,52 @@ export default function SignUp({ captcha }: Props) {
     formState: { errors },
   } = useForm<FormValues>({ resolver })
 
+  const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
-  const searchParams = useSearchParams()
-  const callbackUrl = searchParams.get('callbackUrl') || '/dashboard'
-  const onSubmit: SubmitHandler<FormValues> = async ({
-    email,
-    password,
-    captcha,
-  }) => {
-    client('/api/users/create', { body: { email, password, captcha } })
-      .then((res) => {
-        signIn('credentials', {
-          username: email,
-          password,
-          redirect: false,
-          callbackUrl,
-        })
-          .then((res) => {
-            router.push(callbackUrl)
-          })
-          .catch((err) => {
-            setError('root', { message: 'Failed to sign in automatically' })
-            console.error(err)
-          })
+  const callbackUrl = (router.query.callbackUrl as string) || '/dashboard'
+
+  const onSubmit: SubmitHandler<FormValues> = async ({ email, password }) => {
+    setIsLoading(true)
+    clearErrors()
+
+    try {
+      // Sign up with Supabase auth
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
+        },
       })
-      .catch((err) => {
-        setError('root', {
-          message:
-            'Failed to sign up due to the error: ' + (err?.message ?? err),
-        })
-      })
+
+      if (error) {
+        throw error
+      }
+
+      if (data?.user) {
+        // Check if email confirmation is required
+        if (data.user.identities?.length === 0) {
+          // User exists but needs to confirm email
+          router.push('/auth/verify-email?email=' + encodeURIComponent(email))
+        } else {
+          // Auto sign-in successful, redirect to dashboard
+          router.push(callbackUrl)
+        }
+      }
+    } catch (err: any) {
+      console.error('Signup error:', err)
+      const errorMessage =
+        err?.message || 'An error occurred during sign up. Please try again.'
+      setError('root', { message: errorMessage })
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const onReset: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
     reset()
+    clearErrors()
   }
 
   return (
@@ -243,41 +243,21 @@ export default function SignUp({ captcha }: Props) {
             </div>
           </div>
         </div>
-        <div>
-          <label
-            htmlFor='captcha'
-            className='text-base font-medium text-gray-900 dark:text-white block mb-2'
+        <div className='flex gap-4'>
+          <button
+            type='submit'
+            disabled={isLoading}
+            className='text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-base px-5 py-3 w-full sm:w-auto text-center disabled:bg-cyan-300'
           >
-            CAPTCHA
-          </label>
-          <SvgCaptcha className='w-150 w-px' svgHtmlRaw={captcha ?? 'TBC0'} />
+            {isLoading ? 'Creating account...' : 'Sign up'}
+          </button>
+          <button
+            type='reset'
+            className='text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-base px-5 py-3 w-full sm:w-auto text-center'
+          >
+            Reset
+          </button>
         </div>
-        <div>
-          {errors?.captcha && (
-            <div className='font-medium text-red-600'>
-              {errors.captcha.message}
-            </div>
-          )}
-          <input
-            {...register('captcha')}
-            type='text'
-            id='captcha'
-            className='bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5'
-          />
-        </div>
-        <button
-          type='submit'
-          className='text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-base px-5 py-3 w-full sm:w-auto text-center'
-        >
-          Submit
-        </button>
-        &nbsp;
-        <button
-          type='reset'
-          className='text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-base px-5 py-3 w-full sm:w-auto text-center'
-        >
-          Reset
-        </button>
       </form>
     </>
   )

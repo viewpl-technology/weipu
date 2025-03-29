@@ -1,9 +1,23 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useAuth } from '../../contexts/auth'
 import DarkSystemLight from '../DarkSystemLight'
 
 export default function Header() {
+  const router = useRouter()
+  const { user, signOut } = useAuth()
+
+  const handleSignOut = async (e: React.MouseEvent) => {
+    e.preventDefault()
+    try {
+      await signOut()
+      // Redirect is handled in the auth context
+    } catch (error) {
+      console.error('Sign out error:', error)
+    }
+  }
+
   return (
     <>
       <nav className='bg-white border-b border-gray-200 fixed z-30 w-full'>
@@ -50,11 +64,11 @@ export default function Header() {
                 <Image
                   src='/images/logo.svg'
                   className='h-6 mr-2'
-                  alt='Windster Logo'
+                  alt='Viewpl Logo'
                   width={32}
                   height={32}
                 />
-                <span className='self-center whitespace-nowrap'>Windster</span>
+                <span className='self-center whitespace-nowrap'>Viewpl</span>
               </Link>
               <form
                 action='#'
@@ -111,12 +125,12 @@ export default function Header() {
                 </svg>
               </button>
               <div className='hidden lg:flex items-center'>
-                <span className='text-base font-normal text-gray-500 mr-5'>
-                  Open source ❤️
-                </span>
-                <div className='-mb-1'>
-                  <span></span>
-                </div>
+                {user && (
+                  <span className='text-base font-normal text-gray-500 mr-5'>
+                    Welcome, {user.email}
+                  </span>
+                )}
+                <DarkSystemLight />
               </div>
               <Link
                 href='/pricing'
@@ -139,12 +153,12 @@ export default function Header() {
                 </svg>
                 Upgrade to Pro
               </Link>
-              <Link
-                className='sm:inline-flex text-gray-600 font-medium text-sm py-2.5 text-center'
-                href='/api/auth/signout'
+              <button
+                onClick={handleSignOut}
+                className='sm:inline-flex text-gray-600 hover:text-gray-900 font-medium text-sm py-2.5 px-4 text-center'
               >
                 Sign Out
-              </Link>
+              </button>
             </div>
           </div>
         </div>
