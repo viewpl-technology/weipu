@@ -2,11 +2,12 @@ import { ReactElement } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import Layout from '../../components/dashboard/layout'
+import ProtectedRoute from '../../components/ProtectedRoute'
 import styles from '../styles/dashboard.module.css'
 
 export default function Dashboard() {
   return (
-    <>
+    <ProtectedRoute>
       <div className='w-full grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4'>
         <div className='bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8  2xl:col-span-2'>
           <div className='flex items-center justify-between mb-4'>
@@ -554,7 +555,7 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
-    </>
+    </ProtectedRoute>
   )
 }
 
