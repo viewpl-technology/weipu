@@ -1,4 +1,3 @@
-// pages/auth/signup.tsx
 import { FormEventHandler, ReactElement, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
