@@ -1,4 +1,3 @@
-// pages/auth/reset-password.tsx
 import { FormEventHandler, ReactElement, useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useForm, Resolver, SubmitHandler } from 'react-hook-form'
