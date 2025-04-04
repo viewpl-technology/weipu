@@ -1,3 +1,15 @@
+# [0.3.0](https://github.com/viewpl-technology/weipu/compare/v0.2.0...v0.3.0) (2025-04-04)
+
+
+### Features
+
+* add after supabase init ([317da76](https://github.com/viewpl-technology/weipu/commit/317da76e6872be6c67cba690665de92c6b35b5f2))
+* add initial schema ([658a172](https://github.com/viewpl-technology/weipu/commit/658a172fefbae93737d09a51077835cdd3e85d81))
+* add supabase ([b684578](https://github.com/viewpl-technology/weipu/commit/b68457836f6909fe6d24b8a77f3396cfd47c86e8))
+* add supabase environment variables in cicd ([e83a208](https://github.com/viewpl-technology/weipu/commit/e83a2087c87570bbf349dbce15614493f2d31adb))
+* update for superbase auth implementation ([2fe527e](https://github.com/viewpl-technology/weipu/commit/2fe527e4579f3f4fb7a9e16132d1d3dbd9d9fe6e))
+* update initial schema ([2272e43](https://github.com/viewpl-technology/weipu/commit/2272e43cb9b3028e08fdb8311bf643a24ce16130))
+
 # [0.2.0](https://github.com/viewpl-technology/weipu/compare/v0.1.5...v0.2.0) (2024-10-28)
 
 
