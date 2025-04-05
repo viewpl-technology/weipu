@@ -12,13 +12,8 @@ const nextConfig = {
   },
 
   // Run the environment config script before building
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      // Run the env-config script when building
-      if (process.env.NODE_ENV === 'production') {
-        require('./env-config')
-      }
-    }
+  webpack: (config) => {
+    require('./env-config')
     return config
   },
 }

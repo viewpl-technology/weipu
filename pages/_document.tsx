@@ -56,6 +56,7 @@ export default function Document() {
           href='/favicon-16x16.png'
         />
         <link rel='manifest' href='/site.webmanifest' />
+        <Script src='/env-config.js' strategy='beforeInteractive' />
       </Head>
       <body>
         <Main />
