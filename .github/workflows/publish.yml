@@ -19,6 +19,8 @@ jobs:
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Detect package manager
         id: detect-package-manager
@@ -51,6 +53,8 @@ jobs:
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Detect package manager
         id: detect-package-manager
@@ -92,6 +96,7 @@ jobs:
         run: |
           echo "NEXT_PUBLIC_SUPABASE_URL=${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}" >> .env
           echo "NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}" >> .env
+          echo "NEXT_PUBLIC_COMMIT_HASH=${GITHUB_SHA}" >> .env
 
       - name: Build with Next.js 🏗️
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
