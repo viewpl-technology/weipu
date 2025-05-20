@@ -121,3 +121,31 @@ export async function updateProfile(updates: {
   if (error) throw error
   return data
 }
+
+// Check if current user has admin role via RPC
+export async function isAdmin() {
+  try {
+    // First make sure we have a session
+    const {
+      data: { session },
+    } = await supabase.auth.getSession()
+    if (!session) return false
+
+    // Check app_metadata directly from the session
+    const role = session.user.app_metadata?.role
+    if (role === 'admin') return true
+
+    // As a fallback, call the RPC function
+    const { data, error } = await supabase.rpc('is_admin_role' as never)
+
+    if (error) {
+      console.error('Error checking admin role:', error)
+      return false
+    }
+
+    return data || false
+  } catch (error) {
+    console.error('Error checking admin status:', error)
+    return false
+  }
+}
