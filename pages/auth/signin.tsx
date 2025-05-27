@@ -51,7 +51,7 @@ export default function SignIn() {
   const [resetEmailSent, setResetEmailSent] = useState(false)
 
   const router = useRouter()
-  const callbackUrl = (router.query.callbackUrl as string) || '/dashboard'
+  const callbackUrl = router.query.callbackUrl as string
 
   const onSubmit: SubmitHandler<FormValues> = async ({ email, password }) => {
     setIsLoading(true)
@@ -69,7 +69,8 @@ export default function SignIn() {
 
       if (data?.session) {
         // Successful sign-in, redirect to the intended URL or dashboard
-        router.push(callbackUrl)
+        const isAdmin = data.session.user.app_metadata.role === 'admin'
+        router.push(callbackUrl ?? (isAdmin ? '/dashboard' : '/'))
       }
     } catch (err: any) {
       console.error('Sign in error:', err)
