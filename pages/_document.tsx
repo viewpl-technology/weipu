@@ -20,10 +20,7 @@ export default function Document() {
         {/* <!-- Social media share --> */}
         <meta property='og:title' content='Viewpl Technology' />
         <meta property='og:site_name' content='Viewpl Technology' />
-        <meta
-          property='og:url'
-          content='https://viewpl.com,https://viewpl.com.au'
-        />
+        <meta property='og:url' content='https://viewpl.com.au' />
         <meta
           property='og:description'
           content='Internet, web & online services'

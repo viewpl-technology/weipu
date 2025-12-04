@@ -1,6 +1,6 @@
 # Weipu 2.0
 
-Source code of viewpl.com/viewp.com.au started from: [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Source code of viewp.com.au started from: [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
