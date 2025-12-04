@@ -17,9 +17,12 @@
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
+  "resolutions": {
+    "cookie": "^0.7.0"
+  },
   "dependencies": {
     "@supabase/auth-helpers-nextjs": "^0.10.0",
-    "@supabase/supabase-js": "^2.47.13",
+    "@supabase/supabase-js": "^2.86.1",
     "@viewpl-technology/svg-captcha": "^1.5.3",
     "dayjs": "^1.11.10",
     "flowbite": "^1.8.1",
