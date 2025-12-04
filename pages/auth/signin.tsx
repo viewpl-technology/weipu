@@ -14,26 +14,25 @@ type FormValues = {
 }
 
 const resolver: Resolver<FormValues> = async (values) => {
+  const errors: any = {}
+
+  if (!values.email) {
+    errors.email = {
+      type: 'required',
+      message: 'Email is required',
+    }
+  }
+
+  if (!values.password) {
+    errors.password = {
+      type: 'required',
+      message: 'Password is required',
+    }
+  }
+
   return {
-    values,
-    errors: {
-      ...(!values.email
-        ? {
-            email: {
-              type: 'required',
-              message: 'Email is required',
-            },
-          }
-        : {}),
-      ...(!values.password
-        ? {
-            password: {
-              type: 'required',
-              message: 'Password is required',
-            },
-          }
-        : {}),
-    },
+    values: Object.keys(errors).length === 0 ? values : {},
+    errors,
   }
 }
 

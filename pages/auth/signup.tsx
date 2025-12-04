@@ -15,56 +15,49 @@ type FormValues = {
 }
 
 const resolver: Resolver<FormValues> = async (values) => {
+  const errors: any = {}
+
+  if (!values.email) {
+    errors.email = {
+      type: 'required',
+      message: 'Email is required',
+    }
+  }
+
+  if (!values.password) {
+    errors.password = {
+      type: 'required',
+      message: 'Password is required',
+    }
+  } else if (values.password.length < 6) {
+    errors.password = {
+      type: 'minLength',
+      message: 'Password must be at least 6 characters',
+    }
+  }
+
+  if (!values.confirmPassword) {
+    errors.confirmPassword = {
+      type: 'required',
+      message: 'Confirm Password is required',
+    }
+  } else if (values.password !== values.confirmPassword) {
+    errors.confirmPassword = {
+      type: 'invalid',
+      message: 'Confirm Password is not same as Password',
+    }
+  }
+
+  if (!values.acceptTerms) {
+    errors.acceptTerms = {
+      type: 'required',
+      message: 'Accept Terms is required',
+    }
+  }
+
   return {
-    values,
-    errors: {
-      ...(!values.email
-        ? {
-            email: {
-              type: 'required',
-              message: 'Email is required',
-            },
-          }
-        : {}),
-      ...(!values.password
-        ? {
-            password: {
-              type: 'required',
-              message: 'Password is required',
-            },
-          }
-        : values.password.length < 6
-        ? {
-            password: {
-              type: 'minLength',
-              message: 'Password must be at least 6 characters',
-            },
-          }
-        : {}),
-      ...(!values.confirmPassword
-        ? {
-            confirmPassword: {
-              type: 'required',
-              message: 'Confirm Password is required',
-            },
-          }
-        : values.password !== values.confirmPassword
-        ? {
-            confirmPassword: {
-              type: 'invalid',
-              message: 'Confirm Password is not same as Password',
-            },
-          }
-        : {}),
-      ...(!values.acceptTerms
-        ? {
-            acceptTerms: {
-              type: 'required',
-              message: 'Accept Terms is required',
-            },
-          }
-        : {}),
-    },
+    values: Object.keys(errors).length === 0 ? values : {},
+    errors,
   }
 }
 
